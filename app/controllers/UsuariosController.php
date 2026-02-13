@@ -56,7 +56,7 @@ class UsuariosController extends Controller {
         try {
             (new Usuario())->delete($id);
         } catch (Throwable $e) {
-            // Apenas segue para listagem
+     
         }
         header('Location: ' . BASE_URL . 'public/index.php?controller=Usuarios&action=index');
     }

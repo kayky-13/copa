@@ -57,7 +57,7 @@ class SelecoesController extends Controller {
         try {
             (new Selecao())->delete($id);
         } catch (Throwable $e) {
-            // Ignora erro específico, apenas exibe mensagem na listagem
+           
         }
         header('Location: ' . BASE_URL . 'public/index.php?controller=Selecoes&action=index');
     }

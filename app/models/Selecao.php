@@ -1,5 +1,5 @@
 <?php
-// Model de Seleção (DAO + validações + criação de estatísticas)
+
 class Selecao extends Model {
     public function all(): array {
         $sql = "SELECT s.id, s.nome, s.continente, s.grupo_id, g.letra AS grupo
@@ -41,7 +41,7 @@ class Selecao extends Model {
     public function delete(int $id): void {
         $stmt = $this->db->prepare("DELETE FROM selecoes WHERE id = ?");
         $stmt->execute([$id]);
-        // Mantém integridade via FK; estatísticas serão removidas via FK ON DELETE CASCADE
+        
     }
 
     public function byGrupo(int $grupo_id): array {

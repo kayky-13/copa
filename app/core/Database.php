@@ -1,5 +1,5 @@
 <?php
-// Classe de conexão PDO com segurança (prepared statements)
+
 class Database {
     private static ?PDO $instance = null;
 

@@ -1,5 +1,5 @@
 <?php
-// Router simples baseado em parâmetros GET: ?controller=Selecoes&action=index
+
 class Router {
     public function dispatch(): void {
         $controllerName = isset($_GET['controller']) ? $_GET['controller'] . 'Controller' : 'ClassificacaoController';

@@ -1,5 +1,5 @@
 <?php
-// Model de Jogo (DAO + validações de regras críticas)
+
 class Jogo extends Model {
     public function all(): array {
         $sql = "SELECT j.id, j.mandante_id, j.visitante_id, j.data_hora, j.estadio, j.fase, j.grupo_id,

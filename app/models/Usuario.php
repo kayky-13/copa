@@ -1,5 +1,5 @@
 <?php
-// Model de Usuário (DAO + validações)
+
 class Usuario extends Model {
     private array $cargos = ['jogador', 'técnico', 'árbitro', 'outros'];
 

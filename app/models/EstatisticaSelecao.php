@@ -1,5 +1,5 @@
 <?php
-// Model de Estatísticas (persistente) com recálculo robusto
+
 class EstatisticaSelecao extends Model {
     public function ensureRow(int $selecao_id): void {
         $stmt = $this->db->prepare("SELECT selecao_id FROM estatisticas_selecao WHERE selecao_id = ?");
@@ -11,17 +11,17 @@ class EstatisticaSelecao extends Model {
         }
     }
 
-    // Recalcula estatísticas agregando todos os resultados dos jogos da fase de grupos do mesmo grupo da seleção
+    
     public function recalcBySelecao(int $selecao_id): void {
         $this->ensureRow($selecao_id);
-        // Descobrir o grupo da seleção
+        
         $stmt = $this->db->prepare("SELECT grupo_id FROM selecoes WHERE id = ?");
         $stmt->execute([$selecao_id]);
         $row = $stmt->fetch();
         if (!$row) return;
         $grupo_id = (int)$row['grupo_id'];
 
-        // Buscar todos os jogos da seleção naquele grupo com resultados registrados
+        
         $sql = "SELECT j.id, j.mandante_id, j.visitante_id, r.gols_mandante, r.gols_visitante
                 FROM jogos j
                 INNER JOIN resultados r ON r.jogo_id = j.id

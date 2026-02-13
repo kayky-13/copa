@@ -1,5 +1,5 @@
 <?php
-// Front Controller
+
 require_once dirname(__DIR__) . '/app/config/config.php';
 
 spl_autoload_register(function ($class) {

@@ -1,5 +1,5 @@
 <?php
-// Base Controller com renderização de Views
+
 abstract class Controller {
     protected function render(string $view, array $data = []): void {
         extract($data);

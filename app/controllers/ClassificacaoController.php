@@ -9,7 +9,7 @@ class ClassificacaoController extends Controller {
         $this->render('classificacao/index', ['grupos' => $grupos, 'tabelas' => $data]);
     }
 
-    // Obtém classificação ordenada pelo critério: pontos desc, saldo desc, gols pro desc, nome asc
+   
     private function classificacaoDoGrupo(int $grupo_id): array {
         $sql = "SELECT s.id, s.nome,
                        COALESCE(e.pontos, 0) AS pontos,

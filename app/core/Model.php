@@ -1,5 +1,5 @@
 <?php
-// Base Model com acesso ao PDO
+
 abstract class Model {
     protected PDO $db;
 

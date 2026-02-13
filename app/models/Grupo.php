@@ -1,5 +1,5 @@
 <?php
-// Model de Grupo (DAO)
+
 class Grupo extends Model {
     public function all(): array {
         $stmt = $this->db->query("SELECT id, letra FROM grupos ORDER BY letra ASC");
