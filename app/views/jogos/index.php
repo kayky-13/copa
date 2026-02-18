@@ -28,7 +28,7 @@
                 <td><?= htmlspecialchars($j['grupo'] ?? '-') ?></td>
                 <td>
                     <?php
-                    // Resultado simplificado via consulta secundária (evita quebrar se não existir)
+                   
                     $resModel = new Resultado();
                     $res = $resModel->findByJogo((int)$j['id']);
                     echo $res ? (int)$res['gols_mandante'] . ' x ' . (int)$res['gols_visitante'] : '-';

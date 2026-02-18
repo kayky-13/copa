@@ -1,8 +1,10 @@
     </main>
     <footer class="footer">
-        <small>&copy; <?= date('Y') ?> Copa Manager</small>
+        <small><img src="../assets/madruga.jpg" alt="Seu Madruga" class="footer-avatar"> &copy; <?= date('Y') ?> pagina do madruguinha</small>
     </footer>
-    <script src="assets/js/sparkles.js"></script>
 </body>
 </html>
+
+
+
 
