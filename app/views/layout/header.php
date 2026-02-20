@@ -25,6 +25,7 @@ function isActiveMenu(string $curC, string $curA, string $c, string $a): bool {
 <head>
   <meta charset="utf-8">
   <title>Gerenciamento Copa do Mundo</title>
+  <base href="<?= htmlspecialchars(BASE_URL . 'public/') ?>">
   <style><?= $css ?></style>
 </head>
 
@@ -53,3 +54,11 @@ function isActiveMenu(string $curC, string $curA, string $c, string $a): bool {
   </header>
 
   <main class="container">
+    <?php if (!empty($_GET['msg'])): ?>
+      <?php
+        $alertType = ($_GET['status'] ?? '') === 'success' ? 'success' : 'error';
+      ?>
+      <section class="alert alert-<?= htmlspecialchars($alertType) ?>">
+        <p><?= htmlspecialchars((string)$_GET['msg']) ?></p>
+      </section>
+    <?php endif; ?>

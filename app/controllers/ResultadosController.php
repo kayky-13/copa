@@ -22,7 +22,8 @@ class ResultadosController extends Controller {
         $gols_visitante = (int)($_POST['gols_visitante'] ?? 0);
         try {
             (new Resultado())->upsert($jogo_id, $gols_mandante, $gols_visitante);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Resultados&action=index');
+            header('Location: ' . app_url('controller=Resultados&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $jogo = (new Jogo())->find($jogo_id);
             $resultado = (new Resultado())->findByJogo($jogo_id);
@@ -30,4 +31,3 @@ class ResultadosController extends Controller {
         }
     }
 }
-

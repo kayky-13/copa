@@ -44,8 +44,14 @@ class Usuario extends Model {
     }
 
     public function delete(int $id): void {
+        if ($id <= 0) {
+            throw new InvalidArgumentException("Usuário inválido para exclusão.");
+        }
         $stmt = $this->db->prepare("DELETE FROM usuarios WHERE id = ?");
         $stmt->execute([$id]);
+        if ($stmt->rowCount() === 0) {
+            throw new RuntimeException("Usuário não encontrado ou já excluído.");
+        }
     }
 
     private function assertSelecaoExists(int $selecao_id): void {
@@ -56,4 +62,3 @@ class Usuario extends Model {
         }
     }
 }
-

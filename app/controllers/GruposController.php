@@ -13,9 +13,22 @@ class GruposController extends Controller {
         $letra = strtoupper(trim($_POST['letra'] ?? ''));
         try {
             (new Grupo())->create($letra);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Grupos&action=index');
+            header('Location: ' . app_url('controller=Grupos&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $this->render('grupos/create', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function delete(): void {
+        $id = (int)($_GET['id'] ?? 0);
+        try {
+            (new Grupo())->delete($id);
+            header('Location: ' . app_url('controller=Grupos&action=index&status=success&msg=' . urlencode('Excluído com sucesso.')));
+            exit;
+        } catch (Throwable $e) {
+            header('Location: ' . app_url('controller=Grupos&action=index&status=error&msg=' . urlencode($e->getMessage())));
+            exit;
         }
     }
 
@@ -30,4 +43,3 @@ class GruposController extends Controller {
         $this->render('grupos/selecoes', ['grupo' => $grupo, 'selecoes' => $selecoes]);
     }
 }
-

@@ -17,6 +17,7 @@
                 <td><?= htmlspecialchars($g['letra']) ?></td>
                 <td>
                     <a class="btn" href="index.php?controller=Grupos&action=selecoes&id=<?= (int)$g['id'] ?>">Seleções do Grupo</a>
+                    <a class="btn danger" href="index.php?controller=Grupos&action=delete&id=<?= (int)$g['id'] ?>" onclick="return confirm('Excluir grupo?')">Excluir</a>
                 </td>
             </tr>
         <?php endforeach; ?>

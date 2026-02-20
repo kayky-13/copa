@@ -21,7 +21,8 @@ class JogosController extends Controller {
         $grupo_id = ($grupo_id_raw === '' ? null : (int)$grupo_id_raw);
         try {
             (new Jogo())->create($mandante_id, $visitante_id, $data_hora, $estadio, $fase, $grupo_id);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Jogos&action=index');
+            header('Location: ' . app_url('controller=Jogos&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $selecoes = (new Selecao())->all();
             $grupos = (new Grupo())->all();
@@ -29,4 +30,3 @@ class JogosController extends Controller {
         }
     }
 }
-

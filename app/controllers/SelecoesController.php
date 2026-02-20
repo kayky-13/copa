@@ -17,7 +17,8 @@ class SelecoesController extends Controller {
         $grupo_id = (int)($_POST['grupo_id'] ?? 0);
         try {
             (new Selecao())->create($nome, $continente, $grupo_id);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Selecoes&action=index');
+            header('Location: ' . app_url('controller=Selecoes&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $grupos = (new Grupo())->all();
             $this->render('selecoes/create', ['grupos' => $grupos, 'error' => $e->getMessage()]);
@@ -43,7 +44,8 @@ class SelecoesController extends Controller {
         $grupo_id = (int)($_POST['grupo_id'] ?? 0);
         try {
             (new Selecao())->update($id, $nome, $continente, $grupo_id);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Selecoes&action=index');
+            header('Location: ' . app_url('controller=Selecoes&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $model = new Selecao();
             $selecao = $model->find($id);
@@ -56,10 +58,12 @@ class SelecoesController extends Controller {
         $id = (int)($_GET['id'] ?? 0);
         try {
             (new Selecao())->delete($id);
+            header('Location: ' . app_url('controller=Selecoes&action=index&status=success&msg=' . urlencode('Excluído com sucesso.')));
+            exit;
         } catch (Throwable $e) {
-           
+            $msg = 'Não foi possível excluir a seleção. Verifique vínculos com usuários, jogos ou resultados.';
+            header('Location: ' . app_url('controller=Selecoes&action=index&status=error&msg=' . urlencode($msg)));
+            exit;
         }
-        header('Location: ' . BASE_URL . 'public/index.php?controller=Selecoes&action=index');
     }
 }
-

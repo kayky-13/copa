@@ -39,9 +39,14 @@ class Selecao extends Model {
     }
 
     public function delete(int $id): void {
+        if ($id <= 0) {
+            throw new InvalidArgumentException("Seleção inválida para exclusão.");
+        }
         $stmt = $this->db->prepare("DELETE FROM selecoes WHERE id = ?");
         $stmt->execute([$id]);
-        
+        if ($stmt->rowCount() === 0) {
+            throw new RuntimeException("Seleção não encontrada ou já excluída.");
+        }
     }
 
     public function byGrupo(int $grupo_id): array {
@@ -58,4 +63,3 @@ class Selecao extends Model {
         }
     }
 }
-

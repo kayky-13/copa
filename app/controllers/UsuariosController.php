@@ -17,7 +17,8 @@ class UsuariosController extends Controller {
         $selecao_id = (int)($_POST['selecao_id'] ?? 0);
         try {
             (new Usuario())->create($nome, $idade, $cargo, $selecao_id);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Usuarios&action=index');
+            header('Location: ' . app_url('controller=Usuarios&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $selecoes = (new Selecao())->all();
             $this->render('usuarios/create', ['selecoes' => $selecoes, 'error' => $e->getMessage()]);
@@ -43,7 +44,8 @@ class UsuariosController extends Controller {
         $selecao_id = (int)($_POST['selecao_id'] ?? 0);
         try {
             (new Usuario())->update($id, $nome, $idade, $cargo, $selecao_id);
-            header('Location: ' . BASE_URL . 'public/index.php?controller=Usuarios&action=index');
+            header('Location: ' . app_url('controller=Usuarios&action=index&status=success&msg=' . urlencode('Salvo com sucesso.')));
+            exit;
         } catch (Throwable $e) {
             $usuario = (new Usuario())->find($id);
             $selecoes = (new Selecao())->all();
@@ -55,10 +57,12 @@ class UsuariosController extends Controller {
         $id = (int)($_GET['id'] ?? 0);
         try {
             (new Usuario())->delete($id);
+            header('Location: ' . app_url('controller=Usuarios&action=index&status=success&msg=' . urlencode('Excluído com sucesso.')));
+            exit;
         } catch (Throwable $e) {
-     
+            $msg = 'Não foi possível excluir o usuário.';
+            header('Location: ' . app_url('controller=Usuarios&action=index&status=error&msg=' . urlencode($msg)));
+            exit;
         }
-        header('Location: ' . BASE_URL . 'public/index.php?controller=Usuarios&action=index');
     }
 }
-

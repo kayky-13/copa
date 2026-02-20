@@ -1,229 +1,344 @@
+:root{
+  /* Fundo: azul + preto + roxo (bem estilo UI) */
+  --bg1:#071a3a;
+  --bg2:#05070f;
+  --bg3:#140a2f;
 
+  --text:#eaf3ff;
+  --muted:rgba(234,243,255,.68);
 
-:root {
-  --bg-1: #0b2cff;
-  --bg-2: #000000;
-  --bg-3: #1f0550;
+  --primary:#32d2ff;
+  --primary2:#4f7cff;
 
-  --text: #eaf3ff;
-  --muted: #a8b4c6;
+  /* Glass cards */
+  --card:rgba(10,16,28,.62);
+  --card2:rgba(10,16,28,.48);
 
-  --primary: #32d2ff;
-  --card: #0e1624;
-  --border: rgba(255,255,255,0.12);
+  --border:rgba(255,255,255,.10);
+  --borderGlow:rgba(50,210,255,.22);
+
+  --radius:18px;
+
+  --shadow: 0 18px 45px rgba(0,0,0,.55);
+  --shadowSoft: 0 10px 26px rgba(0,0,0,.35);
 }
 
-* { box-sizing: border-box; }
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
 
-html, body { height: 100%; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  min-height:100vh;
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  min-height: 100vh;
-  background: linear-gradient(160deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* Halos + gradiente principal */
+  background:
+    radial-gradient(1200px 720px at 18% 10%, rgba(50,210,255,.18), transparent 60%),
+    radial-gradient(900px 620px at 82% 28%, rgba(79,124,255,.16), transparent 62%),
+    radial-gradient(900px 680px at 50% 120%, rgba(160,70,255,.12), transparent 66%),
+    linear-gradient(160deg, var(--bg1), var(--bg2) 55%, var(--bg3));
   background-attachment: fixed;
 }
 
-
-
-.topbar {
+/* ===== TOPBAR (glass + linha neon) ===== */
+.topbar{
   position: sticky;
-  top: 0;
-  padding: 16px 6vw;
-  background: rgba(10, 16, 28, 0.95);
-  border-bottom: 1px solid var(--border);
+  top:0;
+  z-index: 50;
+
+  padding: 14px 0;
+  background: rgba(6,10,18,.62);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
 }
 
-.topbar h1 {
-  margin: 0 0 10px 0;
-  font-size: 1.4rem;
+.topbar::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(50,210,255,.55), transparent);
+  pointer-events:none;
 }
 
-
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.menu a {
-  text-decoration: none;
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.06);
-  font-size: 0.9rem;
-}
-
-.menu a:hover {
-  background: rgba(50,210,255,0.2);
-  border-color: var(--primary);
-}
-
-
-.container {
+.topbar-inner{
   width: 92%;
   max-width: 1100px;
-  margin: 24px auto 40px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-section {
+/* Brand */
+.brand h1{
+  margin:0;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: .2px;
+  line-height: 1.2;
+}
+
+.brand-sub{
+  margin-top: 4px;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+/* ===== MENU (abas glow) ===== */
+.menu{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.menu a,
+.menu .menu-item{
+  text-decoration:none;
+  color: var(--text);
+
+  padding: 9px 12px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+
+  font-size: .92rem;
+  font-weight: 800;
+
+  transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+
+.menu a:hover,
+.menu .menu-item:hover{
+  transform: translateY(-1px);
+  border-color: rgba(50,210,255,.42);
+  background: rgba(50,210,255,.12);
+  box-shadow: 0 12px 26px rgba(50,210,255,.12);
+}
+
+.menu a[aria-current="page"],
+.menu .menu-item[aria-current="page"]{
+  border-color: rgba(50,210,255,.65);
+  background: rgba(50,210,255,.20);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(50,210,255,.18);
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  width: 92%;
+  max-width: 1100px;
+  margin: 22px auto 42px;
+}
+
+/* ===== SECTIONS / CARDS (glass + glow leve) ===== */
+section{
+  position: relative;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 16px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: var(--shadowSoft);
+  overflow: hidden;
 }
 
-section + section { margin-top: 16px; }
-
-h2 {
-  margin-top: 0;
-  font-size: 1.2rem;
+section::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(700px 200px at 15% 0%, rgba(50,210,255,.16), transparent 60%),
+    radial-gradient(560px 180px at 92% 12%, rgba(79,124,255,.12), transparent 62%);
+  opacity:.9;
+  pointer-events:none;
 }
 
-p { color: var(--muted); }
+section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.06);
+  pointer-events:none;
+}
 
+section + section{ margin-top: 16px; }
 
-form { display: grid; gap: 12px; }
+h2{
+  margin: 0 0 10px 0;
+  font-size: 1.12rem;
+  font-weight: 900;
+  letter-spacing: .2px;
+}
 
-label { display: grid; gap: 4px; font-size: 0.9rem; color: var(--muted); }
+p{ color: var(--muted); margin: 6px 0 0; }
 
-input, select {
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: #0b1220;
+/* ===== ALERTAS ===== */
+.alert{
+  margin-bottom: 16px;
+}
+
+.alert p{
+  margin: 0;
+  font-weight: 700;
   color: var(--text);
 }
 
-input:focus, select:focus {
-  outline: none;
-  border-color: var(--primary);
+.alert-success{
+  border-color: rgba(48, 221, 148, .45);
+  background: linear-gradient(180deg, rgba(48, 221, 148, .16), rgba(10, 16, 28, .62));
 }
 
-
-.btn, button.btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--primary);
-  background: #1b3a5a;
-  color: #fff;
-  cursor: pointer;
+.alert-error{
+  border-color: rgba(255, 93, 93, .45);
+  background: linear-gradient(180deg, rgba(255, 93, 93, .16), rgba(10, 16, 28, .62));
 }
 
-.btn:hover, button.btn:hover {
-  background: #24527a;
-}
+/* ===== FORMS ===== */
+form{ display:grid; gap:12px; }
 
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
-}
-
-thead {
-  background: rgba(50,210,255,0.2);
-}
-
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid var(--border);
-  text-align: left;
-}
-
-tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.04);
-}
-
-.footer {
-  text-align: center;
-  padding: 20px 0 28px;
+label{
+  display:grid;
+  gap:6px;
+  font-size: .92rem;
   color: var(--muted);
 }
+
+input, select{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+
+  background: rgba(6,10,18,.58);
+  color: var(--text);
+
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+  transition: border-color .12s ease, box-shadow .12s ease;
+}
+
+input::placeholder{ color: rgba(234,243,255,.35); }
+
+input:focus, select:focus{
+  border-color: rgba(50,210,255,.58);
+  box-shadow:
+    0 0 0 3px rgba(50,210,255,.14),
+    inset 0 0 0 1px rgba(50,210,255,.14);
+}
+
+/* ===== BOTÕES ===== */
+.btn, button.btn, button{
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(50,210,255,.55);
+
+  background: linear-gradient(180deg, rgba(50,210,255,.18), rgba(27,58,90,.62));
+  color: #fff;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(50,210,255,.10);
+
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+}
+
+.btn.danger{
+  border-color: rgba(255,93,93,.55);
+  background: linear-gradient(180deg, rgba(255,93,93,.22), rgba(90,27,27,.62));
+}
+
+.btn:hover, button.btn:hover, button:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,.45),
+    0 0 24px rgba(50,210,255,.14);
+}
+
+.btn:active, button.btn:active, button:active{
+  transform: translateY(0);
+}
+
+/* ===== TABLE ===== */
+table{
+  width:100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+
+  border-radius: 14px;
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(10,16,28,.35);
+}
+
+thead{
+  background: linear-gradient(90deg, rgba(50,210,255,.18), rgba(79,124,255,.14));
+}
+
+th, td{
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  text-align:left;
+  font-size: .95rem;
+}
+
+th{
+  font-weight: 900;
+  letter-spacing: .15px;
+}
+
+tbody tr:nth-child(even){
+  background: rgba(255,255,255,.03);
+}
+
+tbody tr:hover{
+  background: rgba(50,210,255,.08);
+}
+
+/* ===== FOOTER ===== */
 .footer{
   position: relative;
   z-index: 2;
   padding: 18px 0 26px;
   color: var(--muted);
+  text-align:center;
 }
 
 .footer-content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
 }
 
 .footer-avatar{
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,.25);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
 }
 
-/* ===== TOPBAR MAIS NATURAL E PROFISSIONAL ===== */
-
-.topbar{
-  padding: 14px 0;                 /* tira aquele "paredão" de padding lateral */
-  background: rgba(10,16,28,0.92);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-
-/* Cria uma largura fixa e centraliza tudo */
-.topbar .topbar-inner{
-  width: 92%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* Título mais natural (menos “gritante”) */
-.topbar h1{
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-
-/* Linha de descrição menor e mais discreta */
-.brand-sub{
-  margin-top: 4px;
-  color: rgba(230,240,255,0.7);
-  font-size: 0.95rem;
-}
-
-/* Menu fica embaixo e com “cara de aba” */
-.menu{
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* Botões do menu mais consistentes */
-.menu a{
-  padding: 8px 12px;
-  border-radius: 10px;             /* deixa menos “pílula” e mais “app” */
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  color: #eaf3ff;
-  font-weight: 700;
-}
-
-/* Hover leve e profissional */
-.menu a:hover{
-  background: rgba(50,210,255,0.18);
-  border-color: rgba(50,210,255,0.45);
-}
-
-/* Ativo bem claro */
-.menu a[aria-current="page"]{
-  background: rgba(50,210,255,0.28);
-  border-color: rgba(50,210,255,0.7);
-  color: #ffffff;
+/* ===== RESPONSIVO ===== */
+@media (max-width: 560px){
+  .brand h1{ font-size: 1.25rem; }
+  .menu a, .menu .menu-item{ padding: 8px 10px; border-radius: 11px; }
+  section{ padding: 14px; }
+  th, td{ padding: 10px; }
 }

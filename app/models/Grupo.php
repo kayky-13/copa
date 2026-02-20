@@ -21,5 +21,22 @@ class Grupo extends Model {
         $stmt->execute([$letra]);
         return (int)$this->db->lastInsertId();
     }
-}
+    public function delete(int $id): void {
+        if ($id <= 0) {
+            throw new InvalidArgumentException("Grupo inválido para exclusão.");
+        }
 
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM selecoes WHERE grupo_id = ?");
+        $stmt->execute([$id]);
+        $totalSelecoes = (int)$stmt->fetchColumn();
+        if ($totalSelecoes > 0) {
+            throw new RuntimeException("Não é possível excluir o grupo com seleções vinculadas.");
+        }
+
+        $stmt = $this->db->prepare("DELETE FROM grupos WHERE id = ?");
+        $stmt->execute([$id]);
+        if ($stmt->rowCount() === 0) {
+            throw new RuntimeException("Grupo não encontrado ou já excluído.");
+        }
+    }
+}
