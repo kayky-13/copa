@@ -1,5 +1,5 @@
 :root{
-  /* Fundo: azul + preto + roxo (bem estilo UI) */
+
   --bg1:#071a3a;
   --bg2:#05070f;
   --bg3:#140a2f;
@@ -10,7 +10,7 @@
   --primary:#32d2ff;
   --primary2:#4f7cff;
 
-  /* Glass cards */
+ 
   --card:rgba(10,16,28,.62);
   --card2:rgba(10,16,28,.48);
 
@@ -32,7 +32,7 @@ body{
   color:var(--text);
   min-height:100vh;
 
-  /* Halos + gradiente principal */
+
   background:
     radial-gradient(1200px 720px at 18% 10%, rgba(50,210,255,.18), transparent 60%),
     radial-gradient(900px 620px at 82% 28%, rgba(79,124,255,.16), transparent 62%),
@@ -41,7 +41,7 @@ body{
   background-attachment: fixed;
 }
 
-/* ===== TOPBAR (glass + linha neon) ===== */
+
 .topbar{
   position: sticky;
   top:0;
@@ -75,7 +75,6 @@ body{
   gap: 12px;
 }
 
-/* Brand */
 .brand h1{
   margin:0;
   font-size: 1.45rem;
@@ -90,7 +89,7 @@ body{
   color: var(--muted);
 }
 
-/* ===== MENU (abas glow) ===== */
+
 .menu{
   display:flex;
   flex-wrap:wrap;
@@ -131,14 +130,14 @@ body{
     inset 0 0 0 1px rgba(50,210,255,.18);
 }
 
-/* ===== CONTAINER ===== */
+
 .container{
   width: 92%;
   max-width: 1100px;
   margin: 22px auto 42px;
 }
 
-/* ===== SECTIONS / CARDS (glass + glow leve) ===== */
+
 section{
   position: relative;
   background: var(--card);
@@ -184,7 +183,7 @@ h2{
 
 p{ color: var(--muted); margin: 6px 0 0; }
 
-/* ===== ALERTAS ===== */
+
 .alert{
   margin-bottom: 16px;
 }
@@ -205,7 +204,7 @@ p{ color: var(--muted); margin: 6px 0 0; }
   background: linear-gradient(180deg, rgba(255, 93, 93, .16), rgba(10, 16, 28, .62));
 }
 
-/* ===== FORMS ===== */
+
 form{ display:grid; gap:12px; }
 
 label{
@@ -237,7 +236,7 @@ input:focus, select:focus{
     inset 0 0 0 1px rgba(50,210,255,.14);
 }
 
-/* ===== BOTÕES ===== */
+
 .btn, button.btn, button{
   padding: 10px 14px;
   border-radius: 12px;
@@ -273,7 +272,7 @@ input:focus, select:focus{
   transform: translateY(0);
 }
 
-/* ===== TABLE ===== */
+
 table{
   width:100%;
   border-collapse: collapse;
@@ -310,7 +309,7 @@ tbody tr:hover{
   background: rgba(50,210,255,.08);
 }
 
-/* ===== FOOTER ===== */
+
 .footer{
   position: relative;
   z-index: 2;
@@ -335,7 +334,6 @@ tbody tr:hover{
   box-shadow: 0 10px 22px rgba(0,0,0,.35);
 }
 
-/* ===== RESPONSIVO ===== */
 @media (max-width: 560px){
   .brand h1{ font-size: 1.25rem; }
   .menu a, .menu .menu-item{ padding: 8px 10px; border-radius: 11px; }
