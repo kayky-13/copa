@@ -24,7 +24,8 @@ Banco de dados
 As configurações padrão ficam em app/config/config.php:
 Host: localhost
 Banco: cop_word
-Usuário: root
-Senha: (vazia)
-
+Usuário: admin
+Senha: 12345
+integrantes: Kayky e Esdra
+no git hub não tem comit do Esdra pois criei essa conta recentemente e peguei as partes do esdra via pendrive
 madruguinhaaa
